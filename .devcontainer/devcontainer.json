@@ -1,0 +1,49 @@
+{
+    "name": "Advances in Robotic Control - Course Project",
+    "privileged": true,
+    "remoteUser": "rosusr",
+    "image":"ghcr.io/srindot/rosgzpx4",
+    "workspaceFolder": "/home/rosusr/workspace",
+    "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/home/rosusr/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-python.python",
+                "esbenp.prettier-vscode",
+                "eamodio.gitlens",
+                "ms-iot.vscode-ros",
+                "ms-toolsai.jupyter",              
+                "mechatroner.rainbow-csv",         
+                "ms-azuretools.vscode-docker",     
+                "twxs.cmake",                      
+                "ms-vscode.cmake-tools",          
+                "redhat.vscode-yaml",             
+                "smilerobotics.urdf",             
+                "betwo.b2-catkin-tools",          
+                "zachflower.uncrustify",          
+                "ms-python.vscode-pylance" 
+            ]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": ":0",
+        "QT_QPA_PLATFORM": "xcb"
+    },
+    "runArgs": [
+        "--privileged",
+        "-e", "DISPLAY=${localEnv:DISPLAY}",
+        "-e", "QT_QPA_PLATFORM=xcb",
+        "--volume=/tmp/.X11-unix:/tmp/.X11-unix"
+    ],
+    "initializeCommand": "xhost +local:docker",
+    "postCreateCommand": "",
+    "features": {},
+    "mounts": [
+        {
+            "type": "bind",
+            "source": "/home/${localEnv:USER}/.vscode",
+            "target": "/home/remoteUser.vscode"
+        }
+    ]
+}
