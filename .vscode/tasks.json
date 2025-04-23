@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Session 1: MicroXRCEAgent",
+            "type": "shell",
+            "command": "MicroXRCEAgent udp4 -p 8888",
+            "presentation": {
+                "panel": "dedicated",
+                "group": "terminals"
+            }
+        },
+        {
+            "label": "Session 2: PX4 SITL",
+            "type": "shell",
+            "command": "bash",
+            "args": ["-c", "cd ~/PX4-Autopilot && make px4_sitl gz_x500"],
+            "presentation": {
+                "panel": "dedicated",
+                "group": "terminals"
+            }
+        },
+        {
+            "label": "Session 3: QGroundControl",
+            "type": "shell",
+            "command": "QGroundControl",
+            "presentation": {
+                "panel": "dedicated",
+                "group": "terminals"
+            }
+        },
+        {
+            "label": "Session 4: Sensor Combined Listener",
+            "type": "shell",
+            "command": "bash",
+            "args": ["-c", "cd ~/ws_sensor_combined && source /opt/ros/humble/setup.bash && source install/local_setup.bash && ros2 launch px4_ros_com sensor_combined_listener.launch.py"],
+            "presentation": {
+                "panel": "dedicated",
+                "group": "terminals"
+            }
+        },
+        {
+            "label": "Session 5: Offboard Control",
+            "type": "shell",
+            "command": "bash",
+            "args": ["-c", "cd ~/ws_offboard_control/src && cd .. && source /opt/ros/humble/setup.bash && source install/local_setup.bash && python3 ~/workspace/offboard_control.py"],
+            "presentation": {
+                "panel": "dedicated",
+                "group": "terminals"
+            }
+        }
+    ]
+}
