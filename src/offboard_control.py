@@ -82,11 +82,12 @@ class OffboardControl(Node):
     def publish_offboard_control_mode(self):
         """Publish the offboard control mode."""
         msg = OffboardControlMode()
-        msg.position = True
+        msg.position = False
         msg.velocity = False
         msg.acceleration = False
         msg.attitude = False
         msg.body_rate = False
+        msg.direct_actuator = True
         msg.timestamp = int(self.get_clock().now().nanoseconds / 1000)
         self.offboard_control_mode_publisher.publish(msg)
 
@@ -138,7 +139,6 @@ class OffboardControl(Node):
      
 
     def check_pos(self):
-
         # Putting a tolerance of 0.2m
         tolerence = 0.2
 
