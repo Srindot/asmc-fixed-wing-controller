@@ -11,11 +11,10 @@ RUN sudo apt-get update
 
 # Create and build the ws_offboard_control workspace
 RUN git clone https://github.com/PX4/px4_msgs.git && \
-    git clone https://github.com/PX4/px4_ros_com.git && \
-    cd .. && \
-    . /opt/ros/humble/setup.bash && \
-    colcon build && \
-    . install/local_setup.bash
+    git clone https://github.com/PX4/px4_ros_com.git 
+    
+# Give ownership of the user's home directory
+RUN sudo chown -R rosusr:rosusr /home/rosusr
 
 # Set the default command to open a bash shell
 CMD ["bash"]
