@@ -3,8 +3,8 @@
     "privileged": true,
     "remoteUser": "rosusr",
     "image":"ghcr.io/srindot/rosgzpx4",
-    "workspaceFolder": "/home/rosusr/fixedwing_ws",
-    "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/home/rosusr/fixedwing_ws",
+    "workspaceFolder": "/home/rosusr/ws_control_fixed_wing/src/fixed_wing_controller",
+    "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/home/rosusr/ws_control_fixed_wing/src/fixed_wing_controller",
     "customizations": {
         "vscode": {
             "extensions": [
