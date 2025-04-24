@@ -12,7 +12,7 @@ public:
     PIDControlPublisher() : Node("pid_control_publisher") {
         // Publishers for vehicle rates, thrust setpoints, vehicle commands, and offboard mode
         rates_publisher_ = this->create_publisher<px4_msgs::msg::VehicleRatesSetpoint>("/fmu/in/vehicle_rates_setpoint", 10);
-        thrust_publisher_ = this->create_publisher<px4_msgs::msg/vehicle_thrust_setpoint>("fmu/in/vehicle_thrust_setpoint", 10);
+        thrust_publisher_ = this->create_publisher<px4_msgs::msg::VehicleThrustSetpoint>("/fmu/in/vehicle_thrust_setpoint", 10);
         command_publisher_ = this->create_publisher<px4_msgs::msg::VehicleCommand>("/fmu/in/vehicle_command", 10);
         offboard_publisher_ = this->create_publisher<px4_msgs::msg::OffboardControlMode>("/fmu/in/offboard_control_mode", 10);
 
@@ -72,7 +72,8 @@ private:
         rates_msg.reset_integral = false;
         rates_publisher_->publish(rates_msg);
 
-        RCLCPP_INFO(this->get_logger(), "Published Vehicle Rates: Roll=%.2f, Pitch=%.2f, Yaw=%.2f", rates_msg.roll, rates_msg.pitch, rates_msg.yaw);
+        RCLCPP_INFO(this->get_logger(), "Published Vehicle Rates: Roll=%.2f, Pitch=%.2f, Yaw=%.2f",
+                    rates_msg.roll, rates_msg.pitch, rates_msg.yaw);
 
         // Publish thrust setpoints
         px4_msgs::msg::VehicleThrustSetpoint thrust_msg{};
@@ -80,10 +81,10 @@ private:
         thrust_msg.xyz[0] = 0.3;
         thrust_msg.xyz[1] = 0.0;
         thrust_msg.xyz[2] = -0.2;
-
         thrust_publisher_->publish(thrust_msg);
 
-        RCLCPP_INFO(this->get_logger(), "Published Thrust Setpoint: X=%.2f, Y=%.2f, Z=%.2f", thrust_msg.xyz[0], thrust_msg.xyz[1], thrust_msg.xyz[2]);
+        RCLCPP_INFO(this->get_logger(), "Published Thrust Setpoint: X=%.2f, Y=%.2f, Z=%.2f",
+                    thrust_msg.xyz[0], thrust_msg.xyz[1], thrust_msg.xyz[2]);
     }
 };
 
