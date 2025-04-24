@@ -49,9 +49,9 @@ private:
         rates_msg.roll = 0.05;    // Arbitrary roll rate [rad/s]
         rates_msg.pitch = -0.02;  // Arbitrary pitch rate [rad/s]
         rates_msg.yaw = 0.03;     // Arbitrary yaw rate [rad/s]
-        rates_msg.thrust_body[0] = 0.1; // Small forward thrust
+        rates_msg.thrust_body[0] = 0.5; // Small forward thrust
         rates_msg.thrust_body[1] = 0.0;
-        rates_msg.thrust_body[2] = -0.05; // Small downward thrust
+        rates_msg.thrust_body[2] = -0.00; // Small downward thrust
         rates_msg.reset_integral = false;
         rates_publisher_->publish(rates_msg);
 
