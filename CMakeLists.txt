@@ -11,15 +11,15 @@ find_package(rclcpp REQUIRED)  # ROS 2 core library
 find_package(px4_msgs REQUIRED)  # PX4 message definitions
 
 # Define the executable
-add_executable(controller src/controller.cpp)
-target_link_libraries(controller rclcpp::rclcpp)  # REMOVE `px4_msgs::px4_msgs`
-ament_target_dependencies(controller rclcpp px4_msgs)  # `px4_msgs` must stay here
+add_executable(pubtest src/pubtest.cpp)
+target_link_libraries(pubtest rclcpp::rclcpp)  
+ament_target_dependencies(pubtest rclcpp px4_msgs)
 
 # Ensure C++17 compatibility
-target_compile_features(controller PUBLIC c_std_99 cxx_std_17)
+target_compile_features(pubtest PUBLIC c_std_99 cxx_std_17)
 
 # Install the executable
-install(TARGETS controller
+install(TARGETS pubtest
   DESTINATION lib/${PROJECT_NAME})
 
 # Final ROS 2 package declaration

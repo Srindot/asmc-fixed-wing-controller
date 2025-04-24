@@ -1,6 +1,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <px4_msgs/msg/vehicle_rates_setpoint.hpp>
 #include <px4_msgs/msg/vehicle_thrust_setpoint.hpp>
+#include <px4_msgs/msg/vehicle_command.hpp>
 #include <chrono>
 
 using namespace std::chrono_literals;
@@ -8,18 +9,38 @@ using namespace std::chrono_literals;
 class PIDControlPublisher : public rclcpp::Node {
 public:
     PIDControlPublisher() : Node("pid_control_publisher") {
-        // Publishers for vehicle rates and thrust setpoints
+        // Publishers for vehicle rates, thrust setpoints, and vehicle commands
         rates_publisher_ = this->create_publisher<px4_msgs::msg::VehicleRatesSetpoint>("/fmu/in/vehicle_rates_setpoint", 10);
         thrust_publisher_ = this->create_publisher<px4_msgs::msg::VehicleThrustSetpoint>("/fmu/in/vehicle_thrust_setpoint", 10);
+        command_publisher_ = this->create_publisher<px4_msgs::msg::VehicleCommand>("/fmu/in/vehicle_command", 10);
 
-        // Timer to publish data periodically
+        // Timer to publish control commands periodically
         timer_ = this->create_wall_timer(500ms, std::bind(&PIDControlPublisher::publish_control_commands, this));
+
+        // Arm the vehicle
+        arm_vehicle();
     }
 
 private:
     rclcpp::Publisher<px4_msgs::msg::VehicleRatesSetpoint>::SharedPtr rates_publisher_;
     rclcpp::Publisher<px4_msgs::msg::VehicleThrustSetpoint>::SharedPtr thrust_publisher_;
+    rclcpp::Publisher<px4_msgs::msg::VehicleCommand>::SharedPtr command_publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
+
+    void arm_vehicle() {
+        px4_msgs::msg::VehicleCommand command_msg{};
+        command_msg.timestamp = this->get_clock()->now().nanoseconds() / 1000;
+        command_msg.command = px4_msgs::msg::VehicleCommand::VEHICLE_CMD_COMPONENT_ARM_DISARM;
+        command_msg.param1 = 1.0f;  // 1.0 = Arm, 0.0 = Disarm
+        command_msg.target_system = 1;
+        command_msg.target_component = 1;
+        command_msg.source_system = 1;
+        command_msg.source_component = 1;
+        command_msg.from_external = true;
+        
+        command_publisher_->publish(command_msg);
+        RCLCPP_INFO(this->get_logger(), "Sent ARM command to vehicle.");
+    }
 
     void publish_control_commands() {
         // Publish body angular rate setpoints
