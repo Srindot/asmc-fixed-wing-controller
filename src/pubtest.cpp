@@ -63,12 +63,12 @@ private:
         // Publish body angular rate setpoints
         px4_msgs::msg::VehicleRatesSetpoint rates_msg{};
         rates_msg.timestamp = this->get_clock()->now().nanoseconds() / 1000;
-        rates_msg.roll = 0.05;
-        rates_msg.pitch = -0.02;
-        rates_msg.yaw = 0.03;
-        rates_msg.thrust_body[0] = 0.1;
+        rates_msg.roll = 0.00;
+        rates_msg.pitch = 0.00;
+        rates_msg.yaw = 0.00;
+        rates_msg.thrust_body[0] = 0.7;
         rates_msg.thrust_body[1] = 0.0;
-        rates_msg.thrust_body[2] = -0.05;
+        rates_msg.thrust_body[2] = 0.0;
         rates_msg.reset_integral = false;
         rates_publisher_->publish(rates_msg);
 
