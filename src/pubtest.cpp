@@ -66,7 +66,7 @@ private:
         rates_msg.roll = 0.00;
         rates_msg.pitch = 0.00;
         rates_msg.yaw = 0.00;
-        rates_msg.thrust_body[0] = 0.7;
+        rates_msg.thrust_body[0] = 0.0;
         rates_msg.thrust_body[1] = 0.0;
         rates_msg.thrust_body[2] = 0.0;
         rates_msg.reset_integral = false;
@@ -78,9 +78,9 @@ private:
         // Publish thrust setpoints
         px4_msgs::msg::VehicleThrustSetpoint thrust_msg{};
         thrust_msg.timestamp = this->get_clock()->now().nanoseconds() / 1000;
-        thrust_msg.xyz[0] = 0.3;
-        thrust_msg.xyz[1] = 0.0;
-        thrust_msg.xyz[2] = -0.2;
+        thrust_msg.xyz[0] = 0.5;
+        thrust_msg.xyz[1] = 0.5;
+        thrust_msg.xyz[2] = -0.5;
         thrust_publisher_->publish(thrust_msg);
 
         RCLCPP_INFO(this->get_logger(), "Published Thrust Setpoint: X=%.2f, Y=%.2f, Z=%.2f",
