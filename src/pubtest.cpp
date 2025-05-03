@@ -38,7 +38,8 @@ private:
         offboard_msg.velocity = false;
         offboard_msg.acceleration = false;
         offboard_msg.attitude = false;
-        offboard_msg.body_rate = true;  // Enable body rate control
+        offboard_msg.body_rate = true;
+        // offboard_msg.trust = true  // Enable body rate control
 
         offboard_publisher_->publish(offboard_msg);
         RCLCPP_INFO(this->get_logger(), "Offboard control mode activated.");
