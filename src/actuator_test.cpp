@@ -73,33 +73,46 @@ private:
         motors_msg.timestamp = this->get_clock()->now().nanoseconds() / 1000;
         motors_msg.timestamp_sample = motors_msg.timestamp;
         motors_msg.reversible_flags = 0;  // No reversible motors
-        
-        // Set arbitrary motor values (-1 to 1 range)
-        for (int i = 0; i < px4_msgs::msg::ActuatorMotors::NUM_CONTROLS; i++) {
-            // Set throttle value (0.3 = 30%)
-            motors_msg.control[i] = (i == 0) ? 1 : 0.9;
-        }
+    
+        // Assign arbitrary values to each of the 12 motors
+        motors_msg.control[0] = 1.0;
+        motors_msg.control[1] = 0.9;
+        motors_msg.control[2] = 0.8;
+        motors_msg.control[3] = 0.7;
+        motors_msg.control[4] = 0.6;
+        motors_msg.control[5] = 0.5;
+        motors_msg.control[6] = 0.4;
+        motors_msg.control[7] = 0.3;
+        motors_msg.control[8] = 0.2;
+        motors_msg.control[9] = 0.1;
+        motors_msg.control[10] = 0.0;
+        motors_msg.control[11] = -0.1;
+        // If NUM_CONTROLS > 12, set the rest as needed
+    
         motors_publisher_->publish(motors_msg);
-        
+    
         // Publish servo values
         px4_msgs::msg::ActuatorServos servos_msg{};
         servos_msg.timestamp = this->get_clock()->now().nanoseconds() / 1000;
-        
-        // Set arbitrary servo values (-1 to 1 range)
-        // For a typical fixed wing:
-        // servos_msg.control[0] = 0.1;  // Aileron - slight right roll
-        // servos_msg.control[1] = 0.2;  // Elevator - nose up
-        // servos_msg.control[2] = 0.0;  // Rudder - neutral
-        
-        // Set all servos to arbitrary values
-        for (int i = 0; i < px4_msgs::msg::ActuatorServos::NUM_CONTROLS; i++) {
-            servos_msg.control[i] = (i % 2 == 0) ? 0.1 : -0.1; // Alternating pattern
-        }
+    
+        // Assign arbitrary values to each of the 8 servos
+        servos_msg.control[0] = 0.1;
+        servos_msg.control[1] = 0.2;
+        servos_msg.control[2] = -0.1;
+        servos_msg.control[3] = -0.2;
+        servos_msg.control[4] = 0.3;
+        servos_msg.control[5] = -0.3;
+        servos_msg.control[6] = 0.0;
+        servos_msg.control[7] = 0.0;
+        // If NUM_CONTROLS > 8, set the rest as needed
+    
         servos_publisher_->publish(servos_msg);
+    
         RCLCPP_INFO(this->get_logger(), "Offboard mode requested");
         RCLCPP_INFO(this->get_logger(), "Number of actuator servos: %d", px4_msgs::msg::ActuatorServos::NUM_CONTROLS);
         RCLCPP_INFO(this->get_logger(), "Number of actuator Motors: %d", px4_msgs::msg::ActuatorMotors::NUM_CONTROLS);
     }
+    
     
     void engage_offboard_mode() {
         px4_msgs::msg::VehicleCommand msg{};
