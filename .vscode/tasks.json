@@ -14,7 +14,7 @@
             "label": "Session 2: PX4 SITL",
             "type": "shell",
             "command": "bash",
-            "args": ["-c", "cd ~/PX4-Autopilot && make px4_sitl gz_advanced_plane"],
+            "args": ["-c", "cd ~/PX4-Autopilot && make px4_sitl g"],
             "presentation": {
                 "panel": "dedicated",
                 "group": "terminals"
