@@ -96,6 +96,9 @@ private:
             servos_msg.control[i] = (i % 2 == 0) ? 0.1 : -0.1; // Alternating pattern
         }
         servos_publisher_->publish(servos_msg);
+        RCLCPP_INFO(this->get_logger(), "Offboard mode requested");
+        RCLCPP_INFO(this->get_logger(), "Number of actuator servos: %d", px4_msgs::msg::ActuatorServos::NUM_CONTROLS);
+        RCLCPP_INFO(this->get_logger(), "Number of actuator Motors: %d", px4_msgs::msg::ActuatorMotors::NUM_CONTROLS);
     }
     
     void engage_offboard_mode() {
