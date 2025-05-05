@@ -2,6 +2,7 @@
 #include <px4_msgs/msg/offboard_control_mode.hpp>
 #include <px4_msgs/msg/vehicle_command.hpp>
 
+
 using namespace std::chrono_literals;
 
 class MinimalOffboardControl : public rclcpp::Node {

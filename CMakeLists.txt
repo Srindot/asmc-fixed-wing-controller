@@ -30,7 +30,7 @@ target_link_libraries(attitude rclcpp::rclcpp ${tf2_LIBRARIES})
 # Declare dependencies
 ament_target_dependencies(pubtest rclcpp px4_msgs)
 ament_target_dependencies(actuator_test rclcpp px4_msgs)
-ament_target_dependencies(pid rclcpp px4_msgs)
+ament_target_dependencies(pid rclcpp px4_msgs tf2 tf2_ros)
 ament_target_dependencies(attitude rclcpp px4_msgs tf2 tf2_ros)
 
 # Install the executables

@@ -75,7 +75,7 @@ private:
         motors_msg.reversible_flags = 0;  // No reversible motors
     
         // Assign arbitrary values to each of the 12 motors
-        motors_msg.control[0] = 0.9; // Thrust
+        motors_msg.control[0] = 0.8; // Thrust
         motors_msg.control[1] = 0.0;
         motors_msg.control[2] = 0.0;
         motors_msg.control[3] = 0.0;
@@ -98,10 +98,10 @@ private:
         // Assign arbitrary values to each of the 8 servos
         servos_msg.control[0] =  0.0; // Left aileron
         servos_msg.control[1] = -0.0; // Right aileron (Right) Positive Right Turn, if this is negative left turn 
-        servos_msg.control[2] =  0.2; // Elevator Positive PUll Up
+        servos_msg.control[2] =  0.0; // Elevator Positive PUll Up
         servos_msg.control[3] =  0.0; // Rudder Positive Right Turn 
-        servos_msg.control[4] =  -0.4; // Left Flap (shoud be negative ig) positve pulls up
-        servos_msg.control[5] =  -0.4; // Right Flap (should be same as the left one and be negative ig)
+        servos_msg.control[4] =  -0.0; // Left Flap (shoud be negative ig) positve pulls up
+        servos_msg.control[5] =  -0.0; // Right Flap (should be same as the left one and be negative ig)
         servos_msg.control[6] =  0.0; // Nothing
         servos_msg.control[7] =  0.0; // Nothing
         // If NUM_CONTROLS > 8, set the rest as needed
