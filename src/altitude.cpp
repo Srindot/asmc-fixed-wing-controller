@@ -37,9 +37,9 @@ public:
     AltitudeAttitudeControl()
     : Node("altitude_attitude_control"), counter_(0),
       pid_roll_(0.1f, 0.1f, 0.001f),
-      pid_pitch_(0.06f, 0.013f, 0.01f),
+      pid_pitch_(0.06f, 0.013f, 0.027f),
       pid_yaw_(0.2f, 0.2f, 0.01f),
-      pid_altitude_(0.1f, 0.5f, 0.5f)  // Tuned for altitude control
+      pid_altitude_(0.1f, 0.5f, 0.6f)  // Tuned for altitude control
     {
         auto qos_reliable = rclcpp::QoS(1).reliable().transient_local();
         auto qos = rclcpp::QoS(10).best_effort();
