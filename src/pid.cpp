@@ -39,7 +39,7 @@ public:
     : Node("attitude_pid_control"), counter_(0),
       pid_roll_(0.1f, 0.1f, 0.001f),
       pid_pitch_(0.1f, 0.1f, 0.005f),
-      pid_yaw_(0.1f, 0.1f, 0.003f)
+      pid_yaw_(0.1f, 0.2f, 0.01f)
     {
         // Use reliable QoS for critical commands
         auto qos_reliable = rclcpp::QoS(1).reliable().transient_local();
@@ -77,7 +77,7 @@ private:
 
     tf2Scalar desired_roll_ = 0.0f;   // Start with level flight
     tf2Scalar desired_pitch_ = 0.0f;  // Start with level flight
-    tf2Scalar desired_yaw_ = 0.0f;    // Start with current heading
+    tf2Scalar desired_yaw_ = 3*3.14f/2;    // Start with current heading
 
     tf2Scalar current_roll_ = 0.0f;
     tf2Scalar current_pitch_ = 0.0f;
@@ -93,6 +93,11 @@ private:
         );
 
         tf2::Matrix3x3(q).getRPY(current_roll_, current_pitch_, current_yaw_);
+
+            // Normalize yaw to [0, 2π] range
+        if (current_yaw_ < 0) {
+            current_yaw_ += 2.0 * M_PI;
+        }
         
         // Debug output
         RCLCPP_DEBUG(this->get_logger(), "Current attitude: Roll=%.2f, Pitch=%.2f, Yaw=%.2f", 
