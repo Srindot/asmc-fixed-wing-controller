@@ -39,7 +39,7 @@ public:
     : Node("attitude_pid_control"), counter_(0),
       pid_roll_(0.1f, 0.1f, 0.001f),
       pid_pitch_(0.1f, 0.1f, 0.005f),
-      pid_yaw_(0.1f, 0.2f, 0.01f)
+      pid_yaw_(0.2f, 0.2f, 0.01f)
     {
         // Use reliable QoS for critical commands
         auto qos_reliable = rclcpp::QoS(1).reliable().transient_local();
