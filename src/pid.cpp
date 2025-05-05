@@ -37,9 +37,9 @@ class AdvancedPlaneControl : public rclcpp::Node {
 public:
     AdvancedPlaneControl()
     : Node("attitude_pid_control"), counter_(0),
-      pid_roll_(0.1f, 0.1f, 0.001f),
-      pid_pitch_(0.1f, 0.1f, 0.005f),
-      pid_yaw_(0.2f, 0.2f, 0.01f)
+      pid_roll_(0.08f, 0.1f, 0.001f),
+      pid_pitch_(0.06f, 0.013f, 0.01f),
+      pid_yaw_(0.08f, 0.2f, 0.01f)
     {
         // Use reliable QoS for critical commands
         auto qos_reliable = rclcpp::QoS(1).reliable().transient_local();
@@ -75,8 +75,8 @@ private:
     PID pid_pitch_;
     PID pid_yaw_;
 
-    tf2Scalar desired_roll_ = 0.0f;   // Start with level flight
-    tf2Scalar desired_pitch_ = 0.0f;  // Start with level flight
+    tf2Scalar desired_roll_ = 0.3f;   // Start with level flight
+    tf2Scalar desired_pitch_ = -0.0f;  // Start with level flight
     tf2Scalar desired_yaw_ = 3*3.14f/2;    // Start with current heading
 
     tf2Scalar current_roll_ = 0.0f;
