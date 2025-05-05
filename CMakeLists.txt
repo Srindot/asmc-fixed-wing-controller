@@ -20,18 +20,29 @@ add_executable(pubtest src/pubtest.cpp)
 add_executable(actuator_test src/actuator_test.cpp) 
 add_executable(pid src/pid.cpp) 
 add_executable(attitude src/attitude.cpp)
+add_executable(altitude src/altitude.cpp)
+add_executable(display_altitude src/display_altitude.cpp)
+
+
 
 # Link libraries
 target_link_libraries(pubtest rclcpp::rclcpp)  
 target_link_libraries(actuator_test rclcpp::rclcpp)  
 target_link_libraries(pid rclcpp::rclcpp)  
 target_link_libraries(attitude rclcpp::rclcpp ${tf2_LIBRARIES})  
+target_link_libraries(altitude rclcpp::rclcpp ${tf2_LIBRARIES})  
+target_link_libraries(display_altitude rclcpp::rclcpp ${tf2_LIBRARIES})  
+
+
 
 # Declare dependencies
 ament_target_dependencies(pubtest rclcpp px4_msgs)
 ament_target_dependencies(actuator_test rclcpp px4_msgs)
 ament_target_dependencies(pid rclcpp px4_msgs tf2 tf2_ros)
 ament_target_dependencies(attitude rclcpp px4_msgs tf2 tf2_ros)
+ament_target_dependencies(altitude rclcpp px4_msgs tf2 tf2_ros)
+ament_target_dependencies(display_altitude rclcpp px4_msgs tf2 tf2_ros)
+
 
 # Install the executables
 install(TARGETS 
@@ -39,6 +50,8 @@ install(TARGETS
   actuator_test
   pid
   attitude
+  altitude
+  display_altitude
   DESTINATION lib/${PROJECT_NAME})
 
 # Final ROS 2 package declaration
