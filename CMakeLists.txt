@@ -5,28 +5,40 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# Enable C++20 to support designated initializers
+add_compile_options(-std=c++20)
+
 # Find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)  # ROS 2 core library
 find_package(px4_msgs REQUIRED)  # PX4 message definitions
+find_package(tf2 REQUIRED)  # Added for quaternion to Euler conversion
+find_package(tf2_ros REQUIRED)  # Added for TF2 ROS integration
 
 # Define the executable
 add_executable(pubtest src/pubtest.cpp)
 add_executable(actuator_test src/actuator_test.cpp) 
+add_executable(pid src/pid.cpp) 
+add_executable(attitude src/attitude.cpp)
+
+# Link libraries
 target_link_libraries(pubtest rclcpp::rclcpp)  
 target_link_libraries(actuator_test rclcpp::rclcpp)  
+target_link_libraries(pid rclcpp::rclcpp)  
+target_link_libraries(attitude rclcpp::rclcpp ${tf2_LIBRARIES})  
+
+# Declare dependencies
 ament_target_dependencies(pubtest rclcpp px4_msgs)
 ament_target_dependencies(actuator_test rclcpp px4_msgs)
+ament_target_dependencies(pid rclcpp px4_msgs)
+ament_target_dependencies(attitude rclcpp px4_msgs tf2 tf2_ros)
 
-# Ensure C++17 compatibility
-target_compile_features(pubtest PUBLIC c_std_99 cxx_std_17)
-target_compile_features(actuator_test PUBLIC c_std_99 cxx_std_17)
-
-# Install the executable
-install(TARGETS pubtest
-  DESTINATION lib/${PROJECT_NAME})
-
-  install(TARGETS actuator_test
+# Install the executables
+install(TARGETS 
+  pubtest
+  actuator_test
+  pid
+  attitude
   DESTINATION lib/${PROJECT_NAME})
 
 # Final ROS 2 package declaration

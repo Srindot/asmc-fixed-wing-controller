@@ -11,10 +11,12 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <!-- Execution dependencies -->
-  <exec_depend>rclcpp</exec_depend>
-  <exec_depend>px4_msgs</exec_depend>
+  <depend>rclcpp</depend>
+  <depend>px4_msgs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
 
-  <!-- Testing dependencies (if needed) -->
+  <!-- Testing dependencies -->
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 

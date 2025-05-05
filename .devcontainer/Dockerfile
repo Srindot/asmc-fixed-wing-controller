@@ -7,7 +7,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /home/rosusr/ws_control_fixed_wing/src/
 
 # Update packages and install required dependencies
-RUN sudo apt-get update 
+RUN sudo apt-get update && sudo apt-get install ros-humble-tf2 ros-humble-tf2-ros
+
 
 # Create and build the ws_offboard_control workspace
 RUN git clone https://github.com/PX4/px4_msgs.git && \

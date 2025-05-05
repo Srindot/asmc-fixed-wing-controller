@@ -75,18 +75,18 @@ private:
         motors_msg.reversible_flags = 0;  // No reversible motors
     
         // Assign arbitrary values to each of the 12 motors
-        motors_msg.control[0] = 1.0;
-        motors_msg.control[1] = 0.9;
-        motors_msg.control[2] = 0.8;
-        motors_msg.control[3] = 0.7;
-        motors_msg.control[4] = 0.6;
-        motors_msg.control[5] = 0.5;
-        motors_msg.control[6] = 0.4;
-        motors_msg.control[7] = 0.3;
-        motors_msg.control[8] = 0.2;
-        motors_msg.control[9] = 0.1;
+        motors_msg.control[0] = 0.9; // Thrust
+        motors_msg.control[1] = 0.0;
+        motors_msg.control[2] = 0.0;
+        motors_msg.control[3] = 0.0;
+        motors_msg.control[4] = 0.0;
+        motors_msg.control[5] = 0.0;
+        motors_msg.control[6] = 0.0;
+        motors_msg.control[7] = 0.0;
+        motors_msg.control[8] = 0.0;
+        motors_msg.control[9] = 0.0;
         motors_msg.control[10] = 0.0;
-        motors_msg.control[11] = -0.1;
+        motors_msg.control[11] = 0.0;
         // If NUM_CONTROLS > 12, set the rest as needed
     
         motors_publisher_->publish(motors_msg);
@@ -96,14 +96,14 @@ private:
         servos_msg.timestamp = this->get_clock()->now().nanoseconds() / 1000;
     
         // Assign arbitrary values to each of the 8 servos
-        servos_msg.control[0] = 0.1;
-        servos_msg.control[1] = 0.2;
-        servos_msg.control[2] = -0.1;
-        servos_msg.control[3] = -0.2;
-        servos_msg.control[4] = 0.3;
-        servos_msg.control[5] = -0.3;
-        servos_msg.control[6] = 0.0;
-        servos_msg.control[7] = 0.0;
+        servos_msg.control[0] =  0.0; // Left aileron
+        servos_msg.control[1] = -0.0; // Right aileron (Right) Positive Right Turn, if this is negative left turn 
+        servos_msg.control[2] =  0.2; // Elevator Positive PUll Up
+        servos_msg.control[3] =  0.0; // Rudder Positive Right Turn 
+        servos_msg.control[4] =  -0.4; // Left Flap (shoud be negative ig) positve pulls up
+        servos_msg.control[5] =  -0.4; // Right Flap (should be same as the left one and be negative ig)
+        servos_msg.control[6] =  0.0; // Nothing
+        servos_msg.control[7] =  0.0; // Nothing
         // If NUM_CONTROLS > 8, set the rest as needed
     
         servos_publisher_->publish(servos_msg);
