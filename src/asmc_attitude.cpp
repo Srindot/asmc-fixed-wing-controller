@@ -110,7 +110,7 @@ public:
           // ASMC controllers with adaptation parameters
           // Parameters: lambda, A, k0_nominal, k1_nominal, alpha0, alpha1, epsilon
           asmc_roll_(10.0f, 0.01f, 0.2f, 0.1f, 0.05f, 0.02f, 0.02f),
-          asmc_pitch_(2.22f, 0.027f, 0.3f, 0.15f, 0.3f, 0.1f, 0.3f),
+          asmc_pitch_(2.22f, 0.027f, 0.0f, 0.0f, 0.3f, 0.1f, 0.3f),
           last_time_(0)
     {
         auto qos_reliable = rclcpp::QoS(1).reliable().transient_local();
