@@ -117,13 +117,11 @@ private:
         offboard_control_mode_publisher_->publish(msg);
     }
 
-
-
     void publish_actuator_values() {
         float dt = 0.1f;
     
         float roll_cmd = std::clamp(pid_roll_.compute(desired_roll_ - current_roll_, dt), -1.0f, 1.0f);
-        float yaw_cmd  = std::clamp(pid_yaw_.compute(desired_yaw_ - current_yaw_, dt), -1.0f, 1.0f);
+        // float yaw_cmd = std::clamp(pid_yaw_.compute(desired_yaw_ - current_yaw_, dt), -1.0f, 1.0f); // Comment out this line
     
         float altitude_error = desired_altitude_ - current_altitude_;
         float throttle = std::clamp(pid_altitude_.compute(altitude_error, dt), 0.3f, 1.0f);
@@ -147,7 +145,7 @@ private:
         servos_msg.control[0] = -roll_cmd;
         servos_msg.control[1] = roll_cmd;
         servos_msg.control[2] = pitch_cmd;
-        servos_msg.control[3] = yaw_cmd;
+        servos_msg.control[3] = 0.0f;  // Add this line to use yaw_cmd for rudder
         servos_publisher_->publish(servos_msg);
     
         RCLCPP_INFO(this->get_logger(),
@@ -155,7 +153,6 @@ private:
             desired_altitude_, current_altitude_, throttle,
             pitch_cmd);
     }
-    
 
     void engage_offboard_mode() {
         px4_msgs::msg::VehicleCommand msg{};
