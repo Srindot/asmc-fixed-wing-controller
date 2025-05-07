@@ -22,9 +22,8 @@ add_executable(pid src/pid.cpp)
 add_executable(attitude src/attitude.cpp)
 add_executable(altitude src/altitude.cpp)
 add_executable(display_altitude src/display_altitude.cpp)
-add_executable(asmc src/asmc.cpp)
-add_executable(asmc_alt src/asmc_alt.cpp)
 add_executable(asmc_attitude src/asmc_attitude.cpp)
+add_executable(asmc_altitude src/asmc_altitude.cpp)
 
 
 
@@ -35,9 +34,8 @@ target_link_libraries(pid rclcpp::rclcpp)
 target_link_libraries(attitude rclcpp::rclcpp ${tf2_LIBRARIES})  
 target_link_libraries(altitude rclcpp::rclcpp ${tf2_LIBRARIES})  
 target_link_libraries(display_altitude rclcpp::rclcpp ${tf2_LIBRARIES})  
-target_link_libraries(asmc rclcpp::rclcpp ${tf2_LIBRARIES})  
-target_link_libraries(asmc_alt rclcpp::rclcpp ${tf2_LIBRARIES})  
 target_link_libraries(asmc_attitude rclcpp::rclcpp ${tf2_LIBRARIES})  
+target_link_libraries(asmc_altitude rclcpp::rclcpp ${tf2_LIBRARIES})  
 
 
 
@@ -48,9 +46,8 @@ ament_target_dependencies(pid rclcpp px4_msgs tf2 tf2_ros)
 ament_target_dependencies(attitude rclcpp px4_msgs tf2 tf2_ros)
 ament_target_dependencies(altitude rclcpp px4_msgs tf2 tf2_ros)
 ament_target_dependencies(display_altitude rclcpp px4_msgs tf2 tf2_ros)
-ament_target_dependencies(asmc rclcpp px4_msgs tf2 tf2_ros)
-ament_target_dependencies(asmc_alt rclcpp px4_msgs tf2 tf2_ros)
 ament_target_dependencies(asmc_attitude rclcpp px4_msgs tf2 tf2_ros)
+ament_target_dependencies(asmc_altitude rclcpp px4_msgs tf2 tf2_ros)
 
 
 # Install the executables
@@ -61,9 +58,8 @@ install(TARGETS
   attitude
   altitude
   display_altitude
-  asmc
-  asmc_alt
   asmc_attitude
+  asmc_altitude
   DESTINATION lib/${PROJECT_NAME})
 
 # Final ROS 2 package declaration

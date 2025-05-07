@@ -75,9 +75,9 @@ private:
     PID pid_pitch_;
     PID pid_yaw_;
 
-    tf2Scalar desired_roll_ = 0.0f;   // Start with level flight
-    tf2Scalar desired_pitch_ = -0.0f;  // Start with level flight
-    tf2Scalar desired_yaw_ = 0.0;    // Start with current heading
+tf2Scalar desired_roll_ = 0.04f;   // Start with level flight
+    tf2Scalar desired_pitch_ = 0.3f;  // Start with level flight
+    tf2Scalar desired_yaw_ = 3.14f/2;    // Start with current heading
 
     tf2Scalar current_roll_ = 0.0f;
     tf2Scalar current_pitch_ = 0.0f;
