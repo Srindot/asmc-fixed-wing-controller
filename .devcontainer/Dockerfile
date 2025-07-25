@@ -8,7 +8,9 @@ WORKDIR /home/rosusr/ws_control_fixed_wing/src/
 
 # Update packages and install required dependencies
 # Update packages, refresh the ROS GPG key, and install dependencies
-RUN apt-get update && apt-get install -y curl gnupg && \
+# Update packages, refresh the ROS GPG key, and install dependencies
+RUN apt-get update --allow-insecure-repositories && \
+    apt-get install -y curl gnupg && \
     curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
     apt-get update && \
     apt-get install -y \
