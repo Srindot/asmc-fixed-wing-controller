@@ -2,10 +2,11 @@
     "name": "Advances in Robotic Control - Course Project",
     "privileged": true,
     "remoteUser": "rosusr",
-    "build":{
-        "dockerfile": "Dockerfile",
-        "context": "."
-    },
+    "image": "ghcr.io/srindot/asmc-controller:latest",
+    // "build":{
+    //     "dockerfile": "Dockerfile",
+    //     "context": "."
+    // },
     "workspaceFolder": "/home/rosusr/ws_control_fixed_wing/src/fixed_wing_controller",
     "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/home/rosusr/ws_control_fixed_wing/src/fixed_wing_controller",
     "customizations": {
