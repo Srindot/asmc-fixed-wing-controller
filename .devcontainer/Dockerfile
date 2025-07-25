@@ -7,8 +7,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /home/rosusr/ws_control_fixed_wing/src/
 
 # Update packages and install required dependencies
-RUN apt-get update && apt-get install -y ros-humble-tf2 ros-humble-tf2-ros
-
+# Update packages, refresh the ROS GPG key, and install dependencies
+RUN apt-get update && apt-get install -y curl gnupg && \
+    curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
+    apt-get update && \
+    apt-get install -y \
+    ros-humble-tf2 \
+    ros-humble-tf2-ros \
+    ros-humble-plotjuggler-ros
+    
 # Create and build the ws_offboard_control workspace
 RUN git clone https://github.com/PX4/px4_msgs.git && \
     git clone https://github.com/PX4/px4_ros_com.git 
