@@ -50,7 +50,7 @@
             }
         },
         {
-            "label": "Session 5: record",
+            "label": "Session 6: record",
             "type": "shell",
             "command": "bash",
             "args": ["-c", "source /opt/ros/humble/setup.bash && source ~/ws_control_fixed_wing/install/local_setup.bash && cd /home/rosusr/ws_control_fixed_wing/src/fixed_wing_controller  && ros2 topic echo --csv /fmu/out/sensor_combined > plot/asmc.csv"],
